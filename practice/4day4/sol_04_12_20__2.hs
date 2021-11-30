@@ -33,4 +33,5 @@ main :: IO ()
 main = do
  input <- readFile "input.txt"
  let x = map (splitAny filtList) (splitOn "\n\n" input)
+ print (length (filter (==7) (map (length . filter (==True) . good) x)))
   where filtList = ["\n","ecl:","pid:","eyr:","hcl:","byr:","iyr:","hgt:","cid:"]

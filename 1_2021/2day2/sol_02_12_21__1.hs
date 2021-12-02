@@ -23,27 +23,3 @@ main = do
  let x = lines input
  print (eval x 0 0)      --part1
  print (eval2 x 0 0 0)   --part2
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

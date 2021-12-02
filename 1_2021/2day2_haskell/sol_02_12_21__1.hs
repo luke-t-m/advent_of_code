@@ -13,8 +13,8 @@ eval (x:xs) d h | lets x == "forward" = eval xs d (h + nums x)
 
 eval2 [] d h a = d*h
 eval2 (x:xs) d h a | lets x == "forward" = eval2 xs (d + (nums x)*a) (h + nums x) a
-                  | lets x == "down" = eval2 xs d h (a + nums x)
-                  | lets x == "up" = eval2 xs d h (a - nums x)
+                   | lets x == "down" = eval2 xs d h (a + nums x)
+                   | lets x == "up" = eval2 xs d h (a - nums x)
 
 
 main :: IO ()

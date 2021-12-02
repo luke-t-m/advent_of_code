@@ -10,4 +10,4 @@ main = do
  let x = splitOn "\n\n" input
  print (sum (map (length . filter (/='\n') . nub) x)) --part 1
  let y = map (splitOn "\n") x
- print (sum (map (length . nub . doeet . filter (/="")) y))
+ print (sum (map (length . nub . doeet . filter (/="")) y)) --part 2

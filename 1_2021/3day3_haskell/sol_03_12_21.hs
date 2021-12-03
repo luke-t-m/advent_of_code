@@ -12,10 +12,10 @@ chemgr :: [[Char]] -> Int -> (Int -> Int -> Bool) -> [[Char]]
 chemgr x n f | length x == 1 = x
              | otherwise = chemgr (filter (\y -> (y!!n)==((cbs x f)!!n)) x) (n+1) f
 
-binToDec :: (Read t, Num t) => [Char] -> t
+binToDec :: [Char] -> Int
 binToDec x = binToDecW (reverse x) 1
 
-binToDecW :: (Read t, Num t) => [Char] -> t -> t
+binToDecW :: [Char] -> Int -> Int
 binToDecW [] _ = 0
 binToDecW (x:xs) n = n * read [x] + binToDecW xs 2*n
 

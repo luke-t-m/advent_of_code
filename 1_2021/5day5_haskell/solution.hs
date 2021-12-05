@@ -4,8 +4,8 @@ import Data.List.Unique
 
 
 points diag ((s:[t]):[u:[v]])
- | m == 1/0 || m == 0 =  [ (a,b) | a <- [x2..x1], b <- [y2..y1]]
- | diag == True && (m == 1 || m == -1) = [ (x2+a,y2+m*a) | a <- [0..(x1-x2)]]
+ | m == 1/0 || m == 0 =  [(a,b) | a <- [x2..x1], b <- [y2..y1]]
+ | diag && (m == 1 || m == -1) = [(x2+a,y2+m*a) | a <- [0..(x1-x2)]]
  | otherwise = []
   where
    (x1,y1) = max (read s, read t) (read u, read v)

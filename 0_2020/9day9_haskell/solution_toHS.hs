@@ -1,11 +1,14 @@
 import Data.List
 import Data.List.Split
+import Data.Hashable
+import qualified Data.HashSet as HS
 
 
 subList [] _ = True
 subList (a:as) b = a `elem` b && subList as (delete a b)
 
-combs n x = nub [sort y | y <- sequence (replicate n x), y `subList` x]
+combs :: (Num a, Eq a, Hashable a, Ord a) => Int -> [a] -> [[a]]
+combs n x = HS.toList (HS.fromList [sort y | y <- sequence (replicate n x), y `subList` x])
 
 
 xmas _ [] = -1
@@ -22,8 +25,8 @@ main :: IO ()
 main = do
  input <- readFile "input.txt"
  let x = splitAt 25 (map read (lines input))
- let p1 = xmas (fst x) (snd x)
+ let p1 = xmas (fst x) (snd x) :: Int
  print p1
- let p2 = contiger p1 [] (snd x)
+ let p2 = contiger p1 [] (snd x) :: [Int]
  print (minimum p2 + maximum p2)
  print "done."

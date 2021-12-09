@@ -1,20 +1,17 @@
 import Data.List
-import Data.List.Unique
 import Data.List.Split
 
 
-c1 y x g@(r:rs) | y /= (length g-1) = (1,0):(c2 y x g)
-                | otherwise = (c2 y x g)
-c2 y x g@(r:rs) | y /= 0 = (-1,0):(c3 y x g)
-                | otherwise = (c3 y x g)
-c3 y x g@(r:rs) | x /= (length r-1) = (0,1):(c4 y x g)
-                | otherwise = (c4 y x g)
-c4 y x g@(r:rs) | x /= 0 = [(0,-1)]
-                | otherwise = []
+dalist = [((\(g,y,x) -> y /= g),(1,0)), 
+          ((\(g,y,x) -> y /= 0),(-1,0)),
+          ((\(g,y,x) -> x /= g),(0,1)),
+          ((\(g,y,x) -> x /= 0),(0,-1))]
 
-isLow g y x = and [(g!!y!!x) < (g!!(y+ym)!!(x+xm)) | (ym,xm) <- (c1 y x g)]
+makelist y x g = map snd (filter (\t -> (fst t) ((length g - 1),y,x)) dalist)  
 
-spread g (y,x) = (y,x):[(y+ym,x+xm) | (ym,xm) <- (c1 y x g), (g!!y!!x) < (g!!(y+ym)!!(x+xm)) && (g!!(y+ym)!!(x+xm)) /= 9]
+isLow g y x = and [(g!!y!!x) < (g!!(y+ym)!!(x+xm)) | (ym,xm) <- (makelist y x g)]
+
+spread g (y,x) = (y,x):[(y+ym,x+xm) | (ym,xm) <- (makelist y x g), (g!!y!!x) < (g!!(y+ym)!!(x+xm)) && (g!!(y+ym)!!(x+xm)) /= 9]
 
 
 spreader g l

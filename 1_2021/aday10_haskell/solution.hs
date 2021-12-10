@@ -6,10 +6,8 @@ partners = [('(',')'),('[',']'),('{','}'),('<','>')]
 scores = [(')',3),(']',57),('}',1197),('>',25137)]
 scores2 = [(')',1),(']',2),('}',3),('>',4)]
 
-op x = (+) (5 * x)
-
 scorer2 x = foldl op 0 (map (\t -> fromJust (lookup t scores2)) x)
-
+ where op x = (+) (5 * x)
 
 score w [] = 0
 score w (x:xs) | length w /= 0 && x == head w = score (tail w) xs

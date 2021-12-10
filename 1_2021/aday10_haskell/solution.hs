@@ -25,6 +25,5 @@ main = do
  input <- readFile "input.txt"
  let x = lines input
  print (sum (map (score []) x)) -- part 1
- let completable = filter (\t -> score [] t == 0) x
- print (median (map (scorer2 . tocomplete []) completable)) -- part 2
+ print (median (map (scorer2 . tocomplete []) (filter (\t -> score [] t == 0) x))) -- part 2
  print "done."

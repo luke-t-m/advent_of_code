@@ -18,11 +18,13 @@ tocomplete w [] = w
 tocomplete w (x:xs) | length w /= 0 && x == head w = tocomplete (tail w) xs
                     | x `elem` "([{<" = tocomplete ((fromJust (lookup x partners)) : w) xs
 
+median x = head (snd (splitAt (((length x)-1) `div` 2) x))
+
 main :: IO ()
 main = do
  input <- readFile "input.txt"
  let x = lines input
  print (sum (map (score []) x)) -- part 1
  let completable = filter (\t -> score [] t == 0) x
- print (head $ snd (splitAt (((length completable)-1) `div` 2) (sort (map (scorer2 . tocomplete []) (completable))))) -- part 2
+ print (median (sort (map (scorer2 . tocomplete []) completable))) -- part 2
  print "done."

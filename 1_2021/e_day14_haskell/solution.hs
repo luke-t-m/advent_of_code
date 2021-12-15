@@ -29,9 +29,9 @@ main :: IO ()
 main = do
  input <- readFile "input.txt"
  let opCs = templater (head (splitOn "\n\n" input))
- let rules = map (conv . splitOn " -> ") (tail (tail (lines input)))
- let steps = ((iterate (\t -> simplify (step rules t)) opCs))
- let solve n = mostTakeLeast (countLetters (steps!!n) opCs)
+     rules = map (conv . splitOn " -> ") (tail (tail (lines input)))
+     steps = ((iterate (\t -> simplify (step rules t)) opCs))
+     solve n = mostTakeLeast (countLetters (steps!!n) opCs)
  putStr "Part 1: "
  print (solve 10)
  putStr "Part 2: "

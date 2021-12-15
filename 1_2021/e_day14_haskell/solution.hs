@@ -41,5 +41,5 @@ main = do
 
 
 -- turn input into list of (pair, count) tuples
--- step through with set of rules- AB rule C produces pairs AC and BC
+-- step through with set of rules- AB rule C produces pairs AC and CB
 -- count letters at end by counting first letter of each pair?

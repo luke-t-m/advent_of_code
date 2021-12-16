@@ -45,17 +45,20 @@ boolToInt True = 1
 boolToInt False = 0
 
 eval [] = []
-eval x@((bpv:btid:[bval]):r) | tid == 0 = (sum (eval (taker val r))) : (eval (drop (length (taker val r)) r))
-                             | tid == 1 = (product (eval (taker val r))) : (eval (drop (length (taker val r)) r))
-                             | tid == 2 = (minimum (eval (taker val r))) : (eval (drop (length (taker val r)) r))
-                             | tid == 3 = (maximum (eval (taker val r))) : (eval (drop (length (taker val r)) r))
+eval x@((bpv:btid:[bval]):r) | tid == 0 = t1 sum
+                             | tid == 1 = t1 product
+                             | tid == 2 = t1 minimum
+                             | tid == 3 = t1 maximum
                              | tid == 4 = val : eval r
-                             | tid == 5 = (boolToInt (a>b)) : (eval (drop (length (taker val r)) r))                     
-                             | tid == 6 = (boolToInt (a<b)) : (eval (drop (length (taker val r)) r))
-                             | tid == 7 = (boolToInt (a==b)) : (eval (drop (length (taker val r)) r))
+                             | tid == 5 = t2 (>)                   
+                             | tid == 6 = t2 (<)
+                             | tid == 7 = t2 (==)
   where tid = binToDec btid
         val = binToDec bval
         (a:b:_) = (eval (taker 2 r))
+        t1 f = (f (eval (taker val r))) : ep
+        t2 f = (boolToInt (a `f` b)) : ep
+        ep = eval (drop (length (taker val r)) r)
 
 main :: IO ()
 main = do

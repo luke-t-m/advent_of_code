@@ -12,8 +12,8 @@ poss xv yv = takeWhile (\(x,y) -> x <= tax2 && y >= tay2) [pos xv yv n | n <- [1
 val = filter (\t -> inTA (last t)) (filter (\t -> length t /= 0) [ poss gx gy | gx <- [17..193], gy <- [-136..136]])
  where inTA (x,y) = x >= tax1 && x <= tax2 && y <= tay1 && y >= tay2
 
-maxY = snd (last (sortlast (concat val)))
- where sortlast t = map rev (sort (map rev t))
+maxY = fst (last (sortlast (concat val)))
+ where sortlast t = sort (map rev t)
        rev (a,b) = (b,a)
 
 main :: IO ()

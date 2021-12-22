@@ -61,7 +61,7 @@ reduce a | explode a /= a = reduce (explode a)
          | split' a /= a = reduce (split' a)
          | otherwise = a
 
-add a b = reduce (Pair (reduce a) (reduce b))
+add a b = reduce (Pair a b)
 
 addAll x = foldl add (head x) (tail x)
 

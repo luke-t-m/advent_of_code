@@ -2,6 +2,8 @@
 
 file:		.asciiz "input"
 contents:	.space 11000
+task_1_text:	.asciiz "Task 1: "
+task_2_text:	.asciiz "Task 2: "
 
 .text
 
@@ -56,11 +58,17 @@ new_third:
 	j same_elf
 	
 file_end:
+	la $a0 task_1_text
+	li $v0 4
+	syscall
 	move $a0 $s1
 	li $v0 1
 	syscall
 	li $a0 10
 	li $v0 11
+	syscall
+	la $a0 task_2_text
+	li $v0 4
 	syscall
 	add $a0 $s1 $s2
 	add $a0 $a0 $s3

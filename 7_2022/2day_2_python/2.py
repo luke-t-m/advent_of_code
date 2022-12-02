@@ -12,7 +12,7 @@ moves = plays["B"]
 def solve(lines, part_two = False, score = 0):
     for line in lines:
         opp, you = line[0], line[2]
-        if part_two: score += moves.index(plays[opp][moves.index(you)] ) + 1 + moves.index(you) * 3
+        if part_two: score += moves.index(plays[opp][moves.index(you)]) + 1 + moves.index(you) * 3
         else: score += moves.index(you) + 1 + plays[opp].index(you) * 3
     return score
 

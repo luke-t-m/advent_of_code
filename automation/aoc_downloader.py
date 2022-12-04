@@ -31,8 +31,8 @@ else:
         if do_ai and input("ai part two mode? Y/n: ") == "Y":
             do_p2 = True
         if input("Press enter to use current day for all settings: ") == "":
-            current_year = 2022
-            current_day = 3
+            current_year = str(current_year)
+            current_day = str(current_day)
             year = str(current_year)
             day = str(current_day)
             do_wait = True

@@ -6,9 +6,12 @@ import ChatGPT.ChatGPT as ChatGPT
 
 
 # NOTICE: THIS CODE IS APPALLING. IT'S GETTING A COMPLETE REVAMP (MAYBE). JUST A PROOF OF CONCEPT THAT GOT SECOND PLACE AT ADVENT OF CODE 2022 DAY 4 PART ONE.
+# todo: put prompts into correct files
+# for ai, generate 
 test_mode = False
 do_ai = True
 do_p2 = False
+ai_code_timeout = 5
 
 if test_mode:
     year = "2022"
@@ -25,11 +28,13 @@ else:
     current_year = int(datetime.datetime.now().strftime("%Y"))
     current_day = int(datetime.datetime.now().strftime("%d"))
     while do_input:
-        if do_ai and input("Do part two with ai? Y/n") == "Y":
+        if do_ai and input("ai part two mode? Y/n: ") == "Y":
             do_p2 = True
-        if input("Press enter to use current day for all settings: BROKEN DONT USE") == "":
+        if input("Press enter to use current day for all settings: ") == "":
+            current_year = 2022
+            current_day = 3
             year = str(current_year)
-            day = current_day
+            day = str(current_day)
             do_wait = True
             file = open("session_cookie")
             session_cookie = file.read()[:-1]
@@ -124,8 +129,6 @@ if test_file not in str(subprocess.check_output(["ls", directory])):
     subprocess.run(["touch", directory + "/" + test_file])
 else: print(f"{test_file} already exists.")
 
-if p1_prompt_file not in str(subprocess.check_output(["ls", directory])):
-    subprocess.run(["touch", directory + "/" + p1_prompt_file])
 
 if own_file not in str(subprocess.check_output(["ls", directory])):
     print("copying python file template\n")
@@ -156,7 +159,18 @@ problem_text = problem_text.split("To begin, get your puzzle input.", maxsplit=1
 
 prompt = '"""' + pre_prompt + problem_text + '"""'
 
-print("\nPrompt generated")
+if p1_prompt_file not in str(subprocess.check_output(["ls", directory])):
+    subprocess.run(["touch", directory + "/" + p1_prompt_file])
+    file = open(directory + "/" + p1_prompt_file, "w")
+    file.write(prompt)
+    print("Wrote prompt to file. make edits iff.")
+    file.close()
+else:
+    file = open(directory + "/" + p1_prompt_file)
+    prompt = file.read()
+    file.close()
+
+print("\nPrompt generated/ read")
 if prompt not in open(directory + "/" + own_file).read():
     print("writing prompt to own code file")
     file = open(directory + "/" + own_file, "a")
@@ -168,13 +182,11 @@ if do_p2:
     print(f"\nDownloading part two {file}...\n")
     file, url = problem_file, problem_url
     subprocess.run(["rm", directory + "/" + file])
-    if file not in str(subprocess.check_output(["ls", directory])):
-        try: subprocess.check_output(["wget", "--header", session_cookie, "--header", contact_info, "-O", directory + "/" + file, url])
-        except:
-            print("Something went wrong, probably a 404. Maybe look at your watch? or your internet connection?")
-            subprocess.run(["rm", directory + "/" + file])
-            print("removed failed download")
-    else: print("Already downloaded.")
+    try: subprocess.check_output(["wget", "--header", session_cookie, "--header", contact_info, "-O", directory + "/" + file, url])
+    except:
+        print("Something went wrong, probably a 404. Maybe look at your watch? or your internet connection?")
+        subprocess.run(["rm", directory + "/" + file])
+        print("removed failed download")
 
     # this code is super messy and copy paste, I'm in a rush
     file = open(directory + "/" + problem_file)
@@ -182,7 +194,7 @@ if do_p2:
     file.close()
     problem_text = problem_text.split("<main>", maxsplit=1)[1]
     problem_text = re.sub("<(.*?)>", "", problem_text)
-    problem_text = problem_text.split("your puzzle input.", maxsplit=1)[0]
+    problem_text = problem_text.split("Although it hasn't changed, you can still get your puzzle input", maxsplit=1)[0]
 
     prompt = '"""' + pre_prompt + problem_text + '"""'
 
@@ -208,9 +220,13 @@ else: print("ai output file already exists")
 num = 0
 while do_ai:
     # IF PART 2 PROMPT FILE EXISTS, GET ON THAT. PRINT TEST FILE OUTPUT AND INPUT OUTPUT TO FILE
-    if do_p2: ai_code_file = day + f"_ai_p2_{num}.py"
-    else: ai_code_file = day + f"_ai_p1_{num}.py"
-
+    if do_p2: ai_code_file = "z_" + day + f"_ai_p2_{num}.py"
+    else: ai_code_file = "z_" + day + f"_ai_p1_{num}.py"
+    while ai_code_file in str(subprocess.check_output(["ls", directory])):
+        num += 1
+        if do_p2: ai_code_file = "z_" + day + f"_ai_p2_{num}.py"
+        else: ai_code_file = "z_" + day + f"_ai_p1_{num}.py"
+        print("ai code file already exists, increment")
 
 
     config = {
@@ -243,40 +259,55 @@ while do_ai:
             file.close()
 
     # replace input file name with test file name, run then swap back
+    test_result = "NO TEST RESULT"
+    input_result = "NO_INPUT_RESULT"
     try:
-        print(subprocess.check_output(["python3", ai_code_file], cwd = directory))
-
-        
+        print(subprocess.check_output(["python3", ai_code_file], cwd = directory, timeout = ai_code_timeout))
     except:
         print("errors in ai code. Generating again")
+        file = open(directory + "/" + ai_out_file, "a")
+        try: file.write(f"\n{ai_out_file}, Part two: {do_p2}, test result: {test_result}, input result: {input_result}")
+        except: print("couldn't write to ai output file")
+        file.close()
         continue
     
-    input_result = subprocess.check_output(["python3", ai_code_file], cwd = directory)
+    input_result = subprocess.check_output(["python3", ai_code_file], cwd = directory, timeout = ai_code_timeout)
 
-    file = open(directory + "/" + ai_code_file, "w")
+    file = open(directory + "/" + ai_code_file)
     code = file.read()
+    file.close
     code = code.replace(input_file, test_file)
+    file = open(directory + "/" + ai_code_file, "w")
     file.write(code)
     file.close()
 
     try:
-        print(subprocess.check_output(["python3", ai_code_file], cwd = directory))
+        print(subprocess.check_output(["python3", ai_code_file], cwd = directory, timeout = ai_code_timeout))
     except:
         print("errors in ai code. Generating again")
-        file = open(directory + "/" + ai_code_file, "w")
+        file = open(directory + "/" + ai_code_file)
         code = file.read()
+        file.close()
         code = code.replace(test_file, input_file)
+        file = open(directory + "/" + ai_code_file, "w")
         file.write(code)
+        file.close()
+        file = open(directory + "/" + ai_out_file, "a")
+        try: file.write(f"\n{ai_out_file}, Part two: {do_p2}, test result: {test_result}, input result: {input_result}")
+        except: print("couldn't write to ai output file")
         file.close()
         continue
 
-    test_result = subprocess.check_output(["python3", ai_code_file], cwd = directory)
-    file = open(directory + "/" + ai_code_file, "w")
+    test_result = subprocess.check_output(["python3", ai_code_file], cwd = directory, timeout = ai_code_timeout)
+    file = open(directory + "/" + ai_code_file)
     code = file.read()
+    file.close()
     code = code.replace(test_file, input_file)
+    file = open(directory + "/" + ai_code_file, "w")
     file.write(code)
     file.close()
 
     file = open(directory + "/" + ai_out_file, "a")
-    file.write(f"\nPart two: {do_p2}, test result: {test_result}, input result: {input_result}")
-    num += 1
+    try: file.write(f"\n{ai_code_file}, Part two: {do_p2}, test result: {test_result}, input result: {input_result}")
+    except: print("couldn't write to ai output file")
+    file.close()

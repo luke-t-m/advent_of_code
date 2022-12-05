@@ -11,7 +11,7 @@ import ChatGPT.ChatGPT as ChatGPT
 test_mode = False
 do_ai = True
 do_p2 = False
-ai_code_timeout = 5
+ai_code_timeout = 1
 
 if test_mode:
     year = "2022"
@@ -31,8 +31,8 @@ else:
         if do_ai and input("ai part two mode? Y/n: ") == "Y":
             do_p2 = True
         if input("Press enter to use current day for all settings: ") == "":
-            current_year = str(current_year)
-            current_day = str(current_day)
+            #current_year = 2021
+            #current_day = 18
             year = str(current_year)
             day = str(current_day)
             do_wait = True
@@ -84,9 +84,9 @@ contact_info = "User-Agent: https://github.com/luke-t-m/advent_of_code/tree/main
 
 # this might break in 2025
 year_directory_prefix = str(int(year) - 2015)
-if int(year_directory_prefix) >= 10: year_directory_prefix = chr(year_directory_prefix+87)
+if int(year_directory_prefix) >= 10: year_directory_prefix = chr(int(year_directory_prefix)+87)
 day_directory_prefix = day
-if int(day_directory_prefix) >= 10: day_directory_prefix = chr(day_directory_prefix+87)
+if int(day_directory_prefix) >= 10: day_directory_prefix = chr(int(day_directory_prefix)+87)
 
 year_directory = year_directory_prefix + "_" + year
 day_directory = day_directory_prefix + "_day" + day + "_python"
@@ -105,6 +105,7 @@ subprocess.run(["mkdir", directory])
 
 today = datetime.date.today()
 today_5_o_clock = datetime.datetime.combine(today, datetime.time(5))
+time_until = today_5_o_clock - datetime.datetime.now()
 if do_wait:
     while True:
         time_until = today_5_o_clock - datetime.datetime.now()
@@ -266,7 +267,7 @@ while do_ai:
     except:
         print("errors in ai code. Generating again")
         file = open(directory + "/" + ai_out_file, "a")
-        try: file.write(f"\n{ai_out_file}, Part two: {do_p2}, test result: {test_result}, input result: {input_result}")
+        try: file.write(f"\n{str(datetime.datetime.now())}, {ai_out_file}, Part two: {do_p2}, test result: {test_result}, input result: {input_result}")
         except: print("couldn't write to ai output file")
         file.close()
         continue
@@ -293,7 +294,7 @@ while do_ai:
         file.write(code)
         file.close()
         file = open(directory + "/" + ai_out_file, "a")
-        try: file.write(f"\n{ai_out_file}, Part two: {do_p2}, test result: {test_result}, input result: {input_result}")
+        try: file.write(f"\n{str(datetime.datetime.now())}, {ai_out_file}, Part two: {do_p2}, test result: {test_result}, input result: {input_result}")
         except: print("couldn't write to ai output file")
         file.close()
         continue
@@ -308,6 +309,6 @@ while do_ai:
     file.close()
 
     file = open(directory + "/" + ai_out_file, "a")
-    try: file.write(f"\n{ai_code_file}, Part two: {do_p2}, test result: {test_result}, input result: {input_result}")
+    try: file.write(f"\n{str(datetime.datetime.now())}, {ai_code_file}, Part two: {do_p2}, test result: {test_result}, input result: {input_result}")
     except: print("couldn't write to ai output file")
     file.close()

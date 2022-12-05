@@ -1,0 +1,12 @@
+
+z_2_ai_p1_0.py, Part two: False, test result: b'0\n', input result: b'9633\n'
+z_2_ai_p1_1.py, Part two: False, test result: b'0\n', input result: b'9633\n'
+z_2_ai_p2_0.py, Part two: True, test result: b'0\n', input result: b'9633\nlujnogabetpmsydyfcovzixaw\n'
+z_2_ai_p2_1.py, Part two: True, test result: b'', input result: b'lujnogabetpmsydyfcovzixaw\nlujnogabetpmsydyfcovzixaw\n'
+z_2_ai_p2_2.py, Part two: True, test result: b'', input result: b''
+2_ai_output, Part two: True, test result: NO TEST RESULT, input result: NO_INPUT_RESULT
+2_ai_output, Part two: True, test result: NO TEST RESULT, input result: NO_INPUT_RESULT
+2_ai_output, Part two: True, test result: NO TEST RESULT, input result: NO_INPUT_RESULT
+z_2_ai_p2_6.py, Part two: True, test result: b'0\n', input result: b'9633\nlujnogabetpmsydyfcovzixaw\n\n'
+z_2_ai_p2_7.py, Part two: True, test result: b'0\nNone\n', input result: b'23985\nlujnogabetpmsydyfcovzixaw\n'
+z_2_ai_p2_8.py, Part two: True, test result: b'0\n', input result: b'9633\nlujnogabetpmsydyfcovzixaw\n'

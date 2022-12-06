@@ -2,7 +2,7 @@ import time
 import subprocess
 import datetime
 import re
-import ChatGPT.ChatGPT as ChatGPT
+import ChatGPT.src.revChatGPT.revChatGPT as ChatGPT
 
 
 # NOTICE: THIS CODE IS APPALLING. IT'S GETTING A COMPLETE REVAMP (MAYBE). JUST A PROOF OF CONCEPT THAT GOT SECOND PLACE AT ADVENT OF CODE 2022 DAY 4 PART ONE.

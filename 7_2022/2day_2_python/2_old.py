@@ -1,4 +1,6 @@
+import time
 lines = open("input").readlines()
+time_start = time.time()
 #lines = open("test").readlines()
 
 
@@ -18,3 +20,4 @@ def solve(lines, part_two = False, score = 0):
 
 print(f"Part one: {solve(lines)}")
 print(f"Part two: {solve(lines, True)}")
+print(time.time() - time_start)

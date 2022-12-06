@@ -37,7 +37,6 @@ This code assumes that the input file contains the steps of the rearrangement pr
 Once you have written and tested your code, you can print the answer by running the code and printing the output. For example, you could run the code like this:
 
 """
-python solution.py
 """
 
 where `solution.py` is the name of your Python script. The output of the code will be the answer to the problem."""

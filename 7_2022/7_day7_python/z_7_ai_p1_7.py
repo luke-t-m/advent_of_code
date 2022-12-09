@@ -4,7 +4,7 @@ Here is one possible solution in Python:
 
 """
 # Parse the input data and build the filesystem tree
-with open('7_input') as f:
+with open('7_test') as f:
   lines = f.readlines()
 
 fs = {'.': {'name': '.', 'parent': None, 'children': [], 'size': 0}}

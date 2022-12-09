@@ -2,7 +2,8 @@ import time
 import subprocess
 import datetime
 import re
-import ChatGPT.src.revChatGPT.revChatGPT as ChatGPT
+#import ChatGPT.src.revChatGPT.revChatGPT as ChatGPT
+from revChatGPT.revChatGPT import Chatbot
 
 
 # NOTICE: THIS CODE IS APPALLING. IT'S GETTING A COMPLETE REVAMP (MAYBE). JUST A PROOF OF CONCEPT THAT GOT SECOND PLACE AT ADVENT OF CODE 2022 DAY 4 PART ONE.
@@ -14,14 +15,14 @@ do_p2 = False
 ai_code_timeout = 1
 
 if test_mode:
-    year = "2022"
-    day = "3"
-    do_wait = True
+    year = "2017"
+    day = "1"
+    do_wait = False
     file = open("session_cookie")
     session_cookie = file.read()[:-1]
     file.close()
     problem_url = f"https://adventofcode.com/{year}/day/{day}"
-    do_p2 = True
+    do_p2 = False
 else:
     do_input = True
     bad_input_message = "Bad input, try again."
@@ -218,6 +219,10 @@ if ai_out_file not in str(subprocess.check_output(["ls", directory])):
     subprocess.run(["touch", directory + "/" + ai_out_file])
 else: print("ai output file already exists")
 
+file = open("openai_pass")
+openai_pass = file.read().strip()
+file.close()
+
 num = 0
 while do_ai:
     # IF PART 2 PROMPT FILE EXISTS, GET ON THAT. PRINT TEST FILE OUTPUT AND INPUT OUTPUT TO FILE
@@ -228,26 +233,33 @@ while do_ai:
         if do_p2: ai_code_file = "z_" + day + f"_ai_p2_{num}.py"
         else: ai_code_file = "z_" + day + f"_ai_p1_{num}.py"
         print("ai code file already exists, increment")
-
-
+#"Authorization": bearer_token
     config = {
-        "Authorization": bearer_token
+            "email": "therewasanemail@here.once",
+            "password": openai_pass
     }
 
     if 1 == 2: #test_mode:
         response = {}
         response["message"] = """print('its over')"""
     else:
-        print("illegal chatgpt usage!!")
-        chatbot = ChatGPT.Chatbot(config, conversation_id=None)
-        response = chatbot.get_chat_response(prompt)
+        try:
+            print("illegal chatgpt usage!!")
+            chatbot = Chatbot(config, conversation_id=None)
+            chatbot.reset_chat()
+            chatbot.refresh_session()
+            #print("its printing")
+            response = chatbot.get_chat_response(prompt, output = "text")["message"]
+        except:
+            print("json problem probably")
+            continue
 
 
     if ai_code_file not in str(subprocess.check_output(["ls", directory])):
         subprocess.run(["touch", directory + "/" + ai_code_file])
     else: print("ai code file already exists")
 
-    to_file = response["message"].replace('```', '"""')
+    to_file = response.replace('```', '"""')
     file = open(directory + "/" + ai_code_file, "w")
     file.write(to_file)
     file.close()

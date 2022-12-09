@@ -1,6 +1,6 @@
 """The following code calculates the total size of each directory in the given file system and prints the sum of the sizes of all directories with a total size of at most 100000.
 
-"""python
+"""
 import re
 
 # Parse the input

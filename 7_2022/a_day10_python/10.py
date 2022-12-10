@@ -15,9 +15,4 @@ for instr in input:
 p1_ans = sum([(c+1) * v for c, v in enumerate(signal_strengths) if c+1 in [20, 60, 100, 140, 180, 220]])
 print(f"Part one: {p1_ans}\nPart two:")
 
-for y in range(1, 7):
-    print("")
-    for x in range(0, 40):
-        if abs(x - signal_strengths[40 * (y-1) + x]) <= 1: print("#", end = "")
-        else: print(".", end="")
-print("\n")
+for p in range(40*6): print(f"\033[1;{31+61*(abs((p%40)-signal_strengths[40*(p//40)+p%40])<=1)}m█\033[0m",end=chr(10*(p%40==39)))

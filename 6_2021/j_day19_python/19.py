@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-input = open("19_input").read()
-#input = open("19_test").read()
+input = open("19_input").readlines()
+#input = open("19_test").readlines()
 
 
 

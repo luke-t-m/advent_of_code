@@ -38,7 +38,8 @@ else:
             day = str(current_day)
             do_wait = True
             file = open("session_cookie")
-            session_cookie = file.read()[:-1]
+            session_cookie = file.read().strip()
+
             file.close()
             problem_url = f"https://adventofcode.com/{year}/day/{day}"
             break
@@ -64,7 +65,7 @@ else:
             session_cookie = input("use stored cookie? (Enter or input new cookie portion of header: ")
             if session_cookie == "":
                 file = open("session_cookie")
-                session_cookie = file.read()[:-1]
+                session_cookie = file.read().strip()
                 file.close()
                 break
             if session_cookie[:16] == "Cookie: session=":
@@ -114,6 +115,7 @@ print(time_until)
 for (file, url) in zip([problem_file, input_file], [problem_url, input_url]):
     print(f"\nDownloading {file}...\n")
     if file not in str(subprocess.check_output(["ls", directory])):
+        print(["wget", "--header", session_cookie, "--header", contact_info, "-O", directory + "/" + file, url])
         try: subprocess.check_output(["wget", "--header", session_cookie, "--header", contact_info, "-O", directory + "/" + file, url])
         except:
             print("Something went wrong, probably a 404. Maybe look at your watch? or your internet connection?")

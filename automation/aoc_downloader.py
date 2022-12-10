@@ -76,10 +76,6 @@ else:
         do_input = input("(n to reinput, enter to proceed): ") == "n"
 
 
-file = open("chatgpt_bearer_token")
-bearer_token = file.read()[:-1]
-file.close()
-
 input_url = problem_url + "/input"
 contact_info = "User-Agent: https://github.com/luke-t-m/advent_of_code/tree/main/automation therewasanemail@here.once"
 

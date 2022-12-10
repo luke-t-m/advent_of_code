@@ -1,1 +1,0 @@
-"""Hello! I'm Assistant, a large language model trained by OpenAI. I'm here to help answer any questions you may have. My knowledge is limited to what I was trained on, which is up until 2021, and I am not currently able to browse the internet for additional information. Please let me know how I can assist you."""

@@ -243,16 +243,16 @@ while do_ai:
         response = {}
         response["message"] = """print('its over')"""
     else:
-        try:
-            print("illegal chatgpt usage!!")
-            chatbot = Chatbot(config, conversation_id=None)
-            chatbot.reset_chat()
-            chatbot.refresh_session()
+        #try:
+        print("illegal chatgpt usage!!")
+        chatbot = Chatbot(config, conversation_id=None)
+        chatbot.reset_chat()
+        chatbot.refresh_session()
             #print("its printing")
-            response = chatbot.get_chat_response(prompt, output = "text")["message"]
-        except:
-            print("json problem probably")
-            continue
+        response = chatbot.get_chat_response(prompt)["message"]
+        #except:
+        #    print("json problem probably")
+        #    continue
 
 
     if ai_code_file not in str(subprocess.check_output(["ls", directory])):

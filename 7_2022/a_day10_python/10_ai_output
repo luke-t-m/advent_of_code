@@ -1,0 +1,39 @@
+
+2022-12-10 05:01:05.291777, 10_ai_output, Part two: False, test result: NO TEST RESULT, input result: NO_INPUT_RESULT
+2022-12-10 05:01:21.849242, z_10_ai_p1_1.py, Part two: False, test result: b'0\n', input result: b'2992\n'
+2022-12-10 05:01:48.931842, 10_ai_output, Part two: False, test result: NO TEST RESULT, input result: NO_INPUT_RESULT
+2022-12-10 05:02:07.395381, 10_ai_output, Part two: False, test result: NO TEST RESULT, input result: NO_INPUT_RESULT
+2022-12-10 05:02:45.201169, z_10_ai_p1_4.py, Part two: False, test result: b'[20, 60, 100, 140, 180, 220]\n', input result: b'[460, 1380, 2300, 3220, 4140, 5060]\n'
+2022-12-10 05:03:05.899023, z_10_ai_p1_5.py, Part two: False, test result: b'1\n', input result: b'3\n'
+2022-12-10 05:03:44.751460, 10_ai_output, Part two: False, test result: NO TEST RESULT, input result: b'10100\n'
+2022-12-10 05:04:41.175403, 10_ai_output, Part two: False, test result: NO TEST RESULT, input result: NO_INPUT_RESULT
+2022-12-10 05:05:09.442315, z_10_ai_p1_8.py, Part two: False, test result: b'6080\n', input result: b'5220\n'
+2022-12-10 05:05:21.116227, z_10_ai_p1_9.py, Part two: False, test result: b'', input result: b''
+2022-12-10 05:05:46.707244, 10_ai_output, Part two: False, test result: NO TEST RESULT, input result: NO_INPUT_RESULT
+2022-12-10 05:06:26.550288, z_10_ai_p1_11.py, Part two: False, test result: b'17524\n', input result: b'29018\n'
+2022-12-10 05:07:27.172096, 10_ai_output, Part two: False, test result: NO TEST RESULT, input result: NO_INPUT_RESULT
+2022-12-10 05:08:12.234639, 10_ai_output, Part two: False, test result: NO TEST RESULT, input result: NO_INPUT_RESULT
+2022-12-10 05:08:56.062835, z_10_ai_p1_14.py, Part two: False, test result: b'20\n500\n4480\n', input result: b'2100\n2500\n'
+2022-12-10 05:09:48.145328, z_10_ai_p1_15.py, Part two: False, test result: b'13000\n', input result: b'7660\n'
+2022-12-10 05:10:24.046266, z_10_ai_p1_16.py, Part two: False, test result: b'[80, 1800, 120, 160, 200, 4180, 4080]\n', input result: b'[-80, 1900, 0, -160, 3420, 4180, 5520]\n'
+2022-12-10 05:11:27.896425, z_10_ai_p1_17.py, Part two: False, test result: b'340\n340\n1020\n1700\n2380\n3060\n3740\n', input result: b'460\n460\n1380\n2300\n3220\n4140\n5060\n'
+2022-12-10 05:12:18.344237, z_10_ai_p1_18.py, Part two: False, test result: b'20\n1080\n500\n4480\n', input result: b'620\n2100\n2500\n'
+2022-12-10 05:12:58.323710, z_10_ai_p1_19.py, Part two: False, test result: b'10700\n', input result: b'16920\n'
+2022-12-10 05:13:46.393627, 10_ai_output, Part two: False, test result: NO TEST RESULT, input result: NO_INPUT_RESULT
+2022-12-10 05:14:28.924763, 10_ai_output, Part two: False, test result: NO TEST RESULT, input result: NO_INPUT_RESULT
+2022-12-10 05:15:00.322436, 10_ai_output, Part two: False, test result: NO TEST RESULT, input result: NO_INPUT_RESULT
+2022-12-10 05:15:42.105597, z_10_ai_p1_23.py, Part two: False, test result: b'20 1\n60 18\n100 5\n140 32\n', input result: b'20 31\n60 35\n100 25\n'
+2022-12-10 05:16:35.856138, 10_ai_output, Part two: False, test result: NO TEST RESULT, input result: NO_INPUT_RESULT
+2022-12-10 05:17:09.404602, z_10_ai_p1_25.py, Part two: False, test result: b'17\n', input result: b'23\n'
+2022-12-10 05:18:00.028775, z_10_ai_p1_26.py, Part two: False, test result: b'12240\n', input result: b'16560\n'
+2022-12-10 05:18:36.016012, 10_ai_output, Part two: False, test result: NO TEST RESULT, input result: NO_INPUT_RESULT
+2022-12-10 05:19:10.465797, 10_ai_output, Part two: False, test result: NO TEST RESULT, input result: NO_INPUT_RESULT
+2022-12-10 05:20:00.513953, 10_ai_output, Part two: False, test result: NO TEST RESULT, input result: NO_INPUT_RESULT
+2022-12-10 05:20:38.446505, 10_ai_output, Part two: False, test result: NO TEST RESULT, input result: NO_INPUT_RESULT
+2022-12-10 05:21:26.571823, z_10_ai_p1_31.py, Part two: False, test result: b'56\n', input result: b'91\n'
+2022-12-10 05:21:55.516612, z_10_ai_p1_32.py, Part two: False, test result: b'4962\n', input result: b'4540\n'
+2022-12-10 05:22:34.550080, 10_ai_output, Part two: False, test result: NO TEST RESULT, input result: NO_INPUT_RESULT
+2022-12-10 05:23:12.640190, 10_ai_output, Part two: False, test result: NO TEST RESULT, input result: NO_INPUT_RESULT
+2022-12-10 05:24:24.531886, z_10_ai_p1_35.py, Part two: False, test result: b'6715\n', input result: b'3945\n'
+2022-12-10 05:25:13.148309, z_10_ai_p1_36.py, Part two: False, test result: b'20\n1080\n500\n4480\n7380\n4180\n', input result: b'620\n2100\n2500\n4340\n10440\n9240\n'
+2022-12-10 05:26:19.380257, 10_ai_output, Part two: False, test result: NO TEST RESULT, input result: NO_INPUT_RESULT

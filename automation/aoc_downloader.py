@@ -171,12 +171,15 @@ else:
     file.close()
 
 print("\nPrompt generated/ read")
+
+"""
 if prompt not in open(directory + "/" + own_file).read():
     print("writing prompt to own code file")
     file = open(directory + "/" + own_file, "a")
     file.write("\n\n\n\n\n\n\n" + prompt)
     file.close()
 else: print("Prompt already in own code file")
+"""
 
 if do_p2:
     print(f"\nDownloading part two {file}...\n")

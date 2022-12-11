@@ -10,7 +10,7 @@ from revChatGPT.revChatGPT import Chatbot
 # todo: put prompts into correct files
 # for ai, generate 
 test_mode = False
-do_ai = True
+do_ai = False
 do_p2 = False
 ai_code_timeout = 1
 

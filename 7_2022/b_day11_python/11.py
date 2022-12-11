@@ -39,7 +39,6 @@ def rounds_p2(monkeys, rounds):
   for n in range(rounds):
     for m in monkeys:
       m.update_inspects()
-      print(m)
       for i in m.items:
         j = {k: m.op(v) for k, v in i.items()}
         jm = {k: v % k for k, v in j.items()}

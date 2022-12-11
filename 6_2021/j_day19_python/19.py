@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 
 input = open("19_input").readlines()
-#input = open("19_test").readlines()
+input = open("19_test").readlines()
 
-
-
-
+scanners = []
+for line in input:
+    line = line.strip()
+    if line[:3] == "---": scanners.append([])
+    else: scanners[-1].append()
 
 
 

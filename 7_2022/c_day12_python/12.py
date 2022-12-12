@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-input = open("12_input").readlines()
-
 def bfs(grid, start):
     queue = [(start, 0)]
     visited = set()

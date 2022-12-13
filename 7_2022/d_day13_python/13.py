@@ -28,10 +28,8 @@ def solve(l, r):
         case int(), int():
             if l < r: return -1
             elif l > r: return 1
-        case int(), list():
-            return solve([l], r)
-        case list(), int():
-            return solve(l, [r])
+        case int(), list(): return solve([l], r)
+        case list(), int(): return solve(l, [r])
         case list(), list():
             for el, er in zip_longest(l, r):
                 if el == None: return -1
@@ -54,12 +52,13 @@ for i in input:
 
 print(f"Part one: {sum([c+1 for c, x in enumerate(right_order) if x == -1])}")
 
-packets += [[[2]], [[6]]]
+new_packets = [[[2]], [[6]]]
+packets += new_packets
 
 packets.sort(key = cmp_to_key(solve))
 
 p2 = 1
-for i in [2, 6]:
-    p2 *= packets.index([[i]]) + 1
+for i in new_packets:
+    p2 *= packets.index(i) + 1
 
 print(f"Part two: {p2}")

@@ -216,13 +216,14 @@ if do_p2:
     prompt = file.read()
     file.close()
 
-if ai_out_file not in str(subprocess.check_output(["ls", directory])):
-    subprocess.run(["touch", directory + "/" + ai_out_file])
-else: print("ai output file already exists")
+if do_ai:
+    if ai_out_file not in str(subprocess.check_output(["ls", directory])):
+        subprocess.run(["touch", directory + "/" + ai_out_file])
+    else: print("ai output file already exists")
 
-file = open("openai_pass")
-openai_pass = file.read().strip()
-file.close()
+    file = open("openai_pass")
+    openai_pass = file.read().strip()
+    file.close()
 
 num = 0
 while do_ai:

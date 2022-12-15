@@ -31,7 +31,7 @@ def part_two(max_xy, sensbeacs):
         if y % 10000 == 0: print(f"Progress: y = {y}", end='\r')
         cants = merge_ranges(near_ranges(y, sensbeacs))
         if len(cants) > 1:
-            assert cants[1][0] - cants[0][1] == 2
+            if cants[1][0] - cants[0][1] != 2: continue
             return 4000000 * (cants[0][1] + 1) + y
 
 test = 0

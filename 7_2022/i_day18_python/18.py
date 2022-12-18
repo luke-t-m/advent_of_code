@@ -12,7 +12,7 @@ cubes = set([tuple([int(y) for y in x.split(",")]) for x in input])
 mods = [(0,0,1),(0,0,-1),(0,1,0),(0,-1,0),(1,0,0),(-1,0,0)]
 p1, p2 = len(cubes) * 6, 0
 
-minx, maxx, miny, maxy, minz, maxz = inf, -inf, inf, -inf, inf, -inf
+minx, miny, minz, maxx, maxy, maxz = inf, inf, inf, -inf, -inf, -inf
 for c in cubes:
     x, y, z = c
     minx = min(x, minx)

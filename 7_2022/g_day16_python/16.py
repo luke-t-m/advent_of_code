@@ -3,6 +3,7 @@ import re
 import math
 import itertools
 
+ 
 def bit_present(bit, bits):
     return (1 << bit) & bits != 0
 
@@ -59,7 +60,7 @@ def with_elephant(considered, rates, cstart, neighbours, n):
     best_released = 0
     lp = len(con)
     for i, (c, ec) in enumerate(zip(con, econ)):
-        print(f"{i} / {lp}", end = "\r")
+        print(f"{i} / {lp}: {best_released} ", end = "\r")
         rat = [rates[i] for i in c]
         erat = [rates[i] for i in ec]
         tim = make_times_matrix(c, neighbours)

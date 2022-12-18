@@ -10,7 +10,7 @@ input = open("18_input").readlines()
 
 cubes = set([tuple([int(y) for y in x.split(",")]) for x in input])
 mods = [(0,0,1),(0,0,-1),(0,1,0),(0,-1,0),(1,0,0),(-1,0,0)]
-p1, p2 = 0, 0
+p1, p2 = len(cubes) * 6, 0
 
 minx, maxx, miny, maxy, minz, maxz = inf, -inf, inf, -inf, inf, -inf
 for c in cubes:
@@ -21,10 +21,8 @@ for c in cubes:
     maxy = max(y, maxy)
     minz = min(z, minz)
     maxz = max(z, maxz)
-    sides = 6
     for m in mods:
-        if add_three(c, m) in cubes: sides -= 1
-    p1 += sides
+        if add_three(c, m) in cubes: p1 -= 1
 
 minx -= 1
 miny -= 1

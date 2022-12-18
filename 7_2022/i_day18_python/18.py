@@ -37,11 +37,11 @@ stack = [(minx, miny, minz)]
 visited = set()
 while stack:
     a = stack.pop(0)
-    x, y, z = a
-    if x > maxx or x < minx or y > maxy or y < miny or z > maxz or z < minz: continue
     for m in mods:
         b = add_three(a, m)
-        if b in cubes: p2 += 1
+        x, y, z = b
+        if x > maxx or x < minx or y > maxy or y < miny or z > maxz or z < minz: continue
+        elif b in cubes: p2 += 1
         elif b not in visited:
             stack.append(b)
             visited.add(b)

@@ -7,9 +7,8 @@ def add_three(x, y):
     return (a+d, b+e, c+f)
 
 input = open("18_input").readlines()
-#input = open("18_test").readlines()
 
-cubes = set([tuple(map(int, x.strip().split(","))) for x in input])
+cubes = set([tuple([int(y) for y in x.split(",")]) for x in input])
 mods = [(0,0,1),(0,0,-1),(0,1,0),(0,-1,0),(1,0,0),(-1,0,0)]
 p1, p2 = 0, 0
 
@@ -46,4 +45,5 @@ while stack:
         elif b not in visited:
             stack.append(b)
             visited.add(b)
+
 print(f"Part one: {p1}\nPart two: {p2}")

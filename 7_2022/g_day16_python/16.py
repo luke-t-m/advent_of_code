@@ -2,7 +2,7 @@
 import re
 import math
 import itertools
-
+from collections import deque
  
 def bit_present(bit, bits):
     return (1 << bit) & bits != 0
@@ -29,11 +29,11 @@ def make_times_matrix(considered, neighbours):
 def best_valvage(start, rates, times, n):
     l = len(times)
     # (pos, time, released, on)
-    queue = [(start, 0, 0, 1 << start)]
+    queue = deque([(start, 0, 0, 1 << start)])
     all_on = 2 ** l - 1
     best_released = 0
     while queue:
-        pos, time, released, on = queue.pop(0)
+        pos, time, released, on = queue.popleft()
         if time > n-1: continue
         best_released = max(released, best_released)
         if best_released - released > 300 or on == all_on: continue

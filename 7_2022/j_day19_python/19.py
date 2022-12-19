@@ -9,25 +9,25 @@ def product(list):
 
 def solve(blueprint, minutes):
     bn, orco, crco, drco, drcc, grco, grcd = blueprint
-    stack = deque([(0, 0, 0, 0, 0, 1, 0, 0, 0)])
+    queue = deque([(0, 0, 0, 0, 0, 1, 0, 0, 0)])
     visited = set()
     best_g = 0
-    while stack:
-        state = stack.popleft()
+    while queue:
+        state = queue.popleft()
         if state in visited: continue
         visited.add(state)
         m, o, c, d, g, nor, ncr, ndr, ngr = state
         m += 1
-        if len(stack) % 10000 == 0: print(len(stack), m, best_g, bn, end="    \r")
+        if len(queue) % 10000 == 0: print(len(queue), m, best_g, bn, end="    \r")
         if g < best_g - ngr: continue
         best_g = max(g, best_g)
         if m > minutes: continue
-        if o >= grco and d >= grcd: stack.append((m, o-grco+nor, c+ncr, d-grcd+ndr, g+ngr, nor, ncr, ndr, ngr+1))
-        if o >= drco and c >= drcc: stack.append((m, o-drco+nor, c-drcc+ncr, d+ndr, g+ngr, nor, ncr, ndr+1, ngr))
-        if o >= crco: stack.append((m, o-crco+nor, c+ncr, d+ndr, g+ngr, nor, ncr+1, ndr, ngr))
-        if o >= orco and ncr <= 1: stack.append((m, o-orco+nor, c+ncr, d+ndr, g+ngr, nor+1, ncr, ndr, ngr))
-        stack.append((m, o+nor, c+ncr, d+ndr, g+ngr, nor, ncr, ndr, ngr))
-    print(len(stack), m, best_g, bn, "    ")
+        if o >= grco and d >= grcd: queue.append((m, o-grco+nor, c+ncr, d-grcd+ndr, g+ngr, nor, ncr, ndr, ngr+1))
+        if o >= drco and c >= drcc: queue.append((m, o-drco+nor, c-drcc+ncr, d+ndr, g+ngr, nor, ncr, ndr+1, ngr))
+        if o >= crco: queue.append((m, o-crco+nor, c+ncr, d+ndr, g+ngr, nor, ncr+1, ndr, ngr))
+        if o >= orco and ncr <= 1: queue.append((m, o-orco+nor, c+ncr, d+ndr, g+ngr, nor+1, ncr, ndr, ngr))
+        queue.append((m, o+nor, c+ncr, d+ndr, g+ngr, nor, ncr, ndr, ngr))
+    print(len(queue), m, best_g, bn, "    ")
     return best_g
 
 

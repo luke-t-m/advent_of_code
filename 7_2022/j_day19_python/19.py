@@ -27,7 +27,7 @@ def solve(blueprint, minutes):
         if o >= crco: queue.append((m, o-crco+nor, c+ncr, d+ndr, g+ngr, nor, ncr+1, ndr, ngr))
         if o >= orco and ncr <= 1: queue.append((m, o-orco+nor, c+ncr, d+ndr, g+ngr, nor+1, ncr, ndr, ngr))
         queue.append((m, o+nor, c+ncr, d+ndr, g+ngr, nor, ncr, ndr, ngr))
-    print(0, m, best_g, bn, "     ")
+    print(0, minutes, best_g, bn, "     ")
     return best_g
 
 

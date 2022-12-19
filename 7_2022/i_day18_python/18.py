@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from math import inf
+from collections import deque
 
 def add_three(x, y):
     a, b, c = x
@@ -31,17 +32,17 @@ maxx += 1
 maxy += 1
 maxz += 1
 
-stack = [(minx, miny, minz)]
+queue = deque([(minx, miny, minz)])
 visited = set()
-while stack:
-    a = stack.pop(0)
+while queue:
+    a = queue.popleft()
     for m in mods:
         b = add_three(a, m)
         x, y, z = b
         if x > maxx or x < minx or y > maxy or y < miny or z > maxz or z < minz: continue
         elif b in cubes: p2 += 1
         elif b not in visited:
-            stack.append(b)
+            queue.append(b)
             visited.add(b)
 
 print(f"Part one: {p1}\nPart two: {p2}")

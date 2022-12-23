@@ -10,10 +10,27 @@ def first(grid, c = -1, r = -1, rev=1):
         for i in list(range(len(grid)))[::rev]:
             v = grid[i][c]
             if v != " ": return i, v
-        
+
+def get_facesize(grid):
+    lens = list(set([len(x) for x in grid])) + [len(grid)]
+    for r in range(min(lens), 0, -1):
+        for l in lens:
+            if l % r !=0: break
+        else: return r
+ 
+def faces(grid):
+    facesize = get_facesize(grid)
+    r, c = len(grid), max(([len(x) for x in grid]))
+    nx, ny = c // facesize, r // facesize
+    faces = []
+    for ym in range(ny):
+        faces.append([])
+        for xm in range(nx):
+            faces[-1].append(2)
+
 
 input = open("22_input").read()
-#input = open("22_test").read()
+input = open("22_test").read()
 
 input = input.split("\n\n")
 grid_string, command = input[0], input[1]
@@ -29,13 +46,14 @@ max_row = max(map(len, grid))
 for y in grid:
     y += [" "] * (max_row - len(y))
 
+
 i, f = first(grid, r=0)
 x = i
 y = 0
 dir = 0
 dirs = [(1, 0), (0, 1), (-1, 0), (0, -1)] #ESWN
 while command != "":
-    print(x, y, dir, command[:100])
+    #print(x, y, dir, command[:100])
     r = re.search("^\d+", command)
     if r:
         r = r.group(0)

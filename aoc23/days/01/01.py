@@ -1,11 +1,6 @@
-file = open("aoc_in")
+file = open("input")
 raw = file.readlines()
 file.close()
-
-# sleep deprivation inspiration
-
-
-
 
 subs = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 sum = 0

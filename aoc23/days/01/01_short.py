@@ -1,0 +1,1 @@
+a=lambda f:print(sum([int((z:=[c for c in f(l) if c.isdigit()])[0]+z[-1]) for l in open("input").readlines()]));a(lambda l:[l:=l.replace(s,s+str(i)+s) for i,s in enumerate(["one","two","three","four","five","six","seven","eight","nine"],1)][-1]);a(lambda a:a)

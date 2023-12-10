@@ -12,6 +12,6 @@ object run {
 
     def solve(ns : Array[Int]): (Int, Int) = if (ns.forall(_ == 0)) (0, 0) else {
         val (l, r) = solve(ns.zip(ns.tail).map((i, j) => j - i))
-        return (ns.head - l, ns.last + r)
+        (ns.head - l, ns.last + r)
     }
 }

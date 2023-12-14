@@ -30,23 +30,18 @@ p1 = score(grid)
 
 seen = []
 grid = [list(i) for i in raw.strip().split("\n")]
-skip = None
-cycles = 0
 want = 1000000000
-while cycles != want:
-    if skip is not None:
-        cycles += ((want - cycles) // skip) * skip
-
-    for i in range(4):
+while True:
+    for _ in range(4):
         slide_up(grid)
         grid = rotated(grid)
 
-    if skip is None and grid in seen:
-        skip = len(seen) - seen.index(grid)
-    else:
-        seen.append(deepcopy(grid))
-
-    cycles += 1
+    if grid in seen:
+        loop_start = seen.index(grid)
+        loop_len = len(seen) - loop_start
+        grid = seen[loop_start + ((want - loop_start) % loop_len) - 1]
+        break
+    seen.append(deepcopy(grid))
 
 p2 = score(grid)
 print(p1, p2)

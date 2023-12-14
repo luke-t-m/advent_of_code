@@ -34,7 +34,7 @@ skip = None
 cycles = 0
 want = 1000000000
 while cycles != want:
-    if skip is not None and (cycles + 100 * skip < 1000000000):
+    if skip is not None:
         cycles += ((want - cycles) // skip) * skip
 
     for i in range(4):

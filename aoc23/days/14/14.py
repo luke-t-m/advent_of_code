@@ -1,14 +1,15 @@
 from copy import deepcopy
 
+
 def slide_up(grid):
     changed = True
     while changed:
         changed = False
         for y in range(len(grid) - 1, 0, -1):
             for x in range(len(grid[0])):
-                if grid[y][x] == "O" and grid[y-1][x] == ".":
+                if grid[y][x] == "O" and grid[y - 1][x] == ".":
                     grid[y][x] = "."
-                    grid[y-1][x] = "O"
+                    grid[y - 1][x] = "O"
                     changed = True
 
 
@@ -49,4 +50,3 @@ while cycles != want:
 
 p2 = score(grid)
 print(p1, p2)
-

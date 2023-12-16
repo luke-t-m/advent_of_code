@@ -21,7 +21,8 @@ for part in parts:
     if part[-1] == "-":
         label = part[:-1]
         label_hash = hash(label)
-        boxes[label_hash] = {l: le for l, le in boxes[label_hash].items() if l != label}
+        if label in boxes[label_hash]:
+            del boxes[label_hash][label]
     elif part[-2] == "=":
         label, lens = part.split("=")
         boxes[hash(label)][label] = int(lens)

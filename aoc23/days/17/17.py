@@ -3,10 +3,8 @@ import heapq
 DIRECTIONS = [(0, 1), (1, 0), (0, -1), (-1, 0)]
 
 
-def make_grid(lines):
-    return {
-        (x, y): int(cell) for y, row in enumerate(lines) for x, cell in enumerate(row)
-    }
+def make_grid(ls):
+    return {(x, y): int(c) for y, r in enumerate(ls) for x, c in enumerate(r)}
 
 
 def solve(grid, start, goal, min_move, max_move):

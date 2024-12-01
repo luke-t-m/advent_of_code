@@ -1,10 +1,11 @@
 #!/usr/bin/python3
-import time
-print("heckos!")
+import sys
 
-#real
+p1 = p2 = 0
+input = sys.argv[1]
 
-def p1(sneed):
-    return sneed + sneed
+lines = input.strip().split("\n")
 
-print(p1(0))
+
+
+print(p1, p2)

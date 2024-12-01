@@ -116,7 +116,7 @@ elif now.day > 25:
 
 
 # Check/ make setup for problem.
-solution_dir = f"{aoc_home}/solutions/{now.year}/{str(now.day).zfill(2)}/first_attempt"
+solution_dir = f"{aoc_home}/solutions/{release.year}/{str(release.day).zfill(2)}/first_attempt"
 solution_file = f"{solution_dir}/{template_filename}"
 template_filepath = f"{aoc_home}/templates/{template_filename}"
 
@@ -147,10 +147,7 @@ if (release - now).total_seconds() > total_sleep:
 
   year = now.year
   if now.month == 12:
-    for day in range(1, min(now.day, 26)):
-      respectfully_download_input(year, day, session_cookie, aoc_home, to_sleep)
-    day = now.day
-    if now.hour > 4:
+    for day in range(1, min(release.day, 26)):
       respectfully_download_input(year, day, session_cookie, aoc_home, to_sleep)
 
 
@@ -161,11 +158,11 @@ while now < release:
   now = datetime.datetime.now(datetime.timezone.utc)
   time.sleep(0.5)
 
-download_input(now.year, now.day, session_cookie, aoc_home, max_trys=5)
+download_input(release.year, release.day, session_cookie, aoc_home, max_trys=5)
 
 print(f"\n\nBeginning watch over {solution_file}.")
 
-input_filename = get_problem_filename(now.year, now.day)
+input_filename = get_problem_filename(release.year, release.day)
 input_filepath = f"{aoc_home}/inputs/{input_filename}"
 raw_input = readFileOrError(input_filepath)
 

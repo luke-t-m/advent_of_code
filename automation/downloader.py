@@ -49,10 +49,10 @@ def download_input(year, day, session, aoc_home, max_trys=1):
         time.sleep(1)
   return False
 
-def respectfully_download_input(year, day, session, aoc_home):
+def respectfully_download_input(year, day, session, aoc_home, to_sleep=15):
   i = download_input(year, day, session, aoc_home)
   if i:
-    time.sleep(15)
+    time.sleep(to_sleep)
   return i
 
 
@@ -134,7 +134,7 @@ subprocess.run(["chmod", "+x", solution_file])
 
 # Fetch missing previous inputs (if we have time before release).
 
-to_sleep = 15
+to_sleep = 1
 total_inputs = (now.year - 2015) * 25 + now.day
 local_inputs = len(os.listdir(f"{aoc_home}/inputs"))
 total_sleep = (total_inputs - local_inputs) * to_sleep
@@ -143,15 +143,15 @@ if (release - now).total_seconds() > total_sleep:
   print(f"Downloading missing inputs. Will take {total_sleep} seconds.")
   for year in range(2015, now.year):
     for day in range(1, 26):
-      respectfully_download_input(year, day, session_cookie, aoc_home)
+      respectfully_download_input(year, day, session_cookie, aoc_home, to_sleep)
 
   year = now.year
   if now.month == 12:
     for day in range(1, min(now.day, 26)):
-      respectfully_download_input(year, day, session_cookie, aoc_home)
+      respectfully_download_input(year, day, session_cookie, aoc_home, to_sleep)
     day = now.day
     if now.hour > 4:
-      respectfully_download_input(year, day, session_cookie, aoc_home)
+      respectfully_download_input(year, day, session_cookie, aoc_home, to_sleep)
 
 
 # Sleep till 0500 UTC and download.

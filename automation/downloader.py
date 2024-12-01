@@ -74,10 +74,11 @@ def readFileOrError(filename):
 
 
 class FileEventHandler(watchdog.events.FileSystemEventHandler):
-    def __init__(self, file):
+    def __init__(self, file, input):
       self.file = file
+      self.input = input
       self.last_bothered = datetime.datetime.now()
-      self.process = subprocess.Popen(self.file)
+      self.process = subprocess.Popen([self.file, self.input])
 
     def on_any_event(self, event: watchdog.events.FileSystemEvent) -> None:
           if event.event_type == "modified":
@@ -87,7 +88,7 @@ class FileEventHandler(watchdog.events.FileSystemEventHandler):
               self.last_bothered = bothered
               self.process.kill()
               print("\n\n\n")
-              self.process = subprocess.Popen(self.file)
+              self.process = subprocess.Popen([self.file, self.input])
 
 
 
@@ -159,14 +160,18 @@ while now < release:
   print(f"Problem releasing in {release - now}. Sleeping...", end='\r')
   now = datetime.datetime.now(datetime.timezone.utc)
   time.sleep(0.5)
-print(f"\n\nBeginning watch over {solution_file}.")
 
 download_input(now.year, now.day, session_cookie, aoc_home, max_trys=5)
 
+print(f"\n\nBeginning watch over {solution_file}.")
+
+input_filename = get_problem_filename(now.year, now.day)
+input_filepath = f"{aoc_home}/inputs/{input_filename}"
+raw_input = readFileOrError(input_filepath)
 
 # Begin watching solution file.
 
-event_handler = FileEventHandler(solution_file)
+event_handler = FileEventHandler(solution_file, raw_input)
 observer = watchdog.observers.Observer()
 observer.schedule(event_handler, solution_file)
 observer.start()

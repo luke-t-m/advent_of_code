@@ -114,6 +114,8 @@ if now.month != 12:
 elif now.day > 25:
   release = release.replace(day=1, year=now.year+1)
 
+release = release.replace(day=2)
+now = now.replace(day=2)
 
 # Check/ make setup for problem.
 solution_dir = f"{aoc_home}/solutions/{release.year}/{str(release.day).zfill(2)}/first_attempt"
@@ -149,6 +151,7 @@ if (release - now).total_seconds() > total_sleep:
   if now.month == 12:
     for day in range(1, min(release.day, 26)):
       respectfully_download_input(year, day, session_cookie, aoc_home, to_sleep)
+
 
 
 # Sleep till 0500 UTC and download.

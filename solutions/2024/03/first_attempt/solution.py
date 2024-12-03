@@ -13,15 +13,26 @@ for l in lines:
         p1 += int(m[0]) * int(m[1])
 
 
+#input = "do()xdon't()ydo()xdon't()ydon't()y"
+
 dos = input.split("do()")
 x = []
 for d in dos:
     x += d.split("don't()")[:1]
 x = "".join(x)
 
+dos = input.split("don't()")
+y = [dos[0]]
+for d in dos[1:]:
+    y += d.split("do()")[1:]
+y = "".join(y)
+
+
 matches = re.findall("mul\((\d*),(\d*)\)", x)
-for m in matches:
+matches2 = re.findall("mul\((\d*),(\d*)\)", y)
+
+for m, m2 in zip(matches, matches2):
     p2 += int(m[0]) * int(m[1])
 
-
+ 
 print(p1, p2)

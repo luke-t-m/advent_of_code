@@ -4,30 +4,12 @@ import time
 import datetime
 import os
 import requests
-import watchdog.events
-import watchdog.observers
 import subprocess
 import pathlib
+from autom import *
 
+TEMPLATE_FILENAME = "solution.py"
 
-
-
-#quick and hacky downloader script started at 0100 dec 01.
-
-# TODOING:
-# load variables and shit from environ and gitignored files.
-# check for missing inputs and download them.
-# wait till its 6 o clock, then try and download the input and store it at filepath.
-# filewatcher on solver script. When file changes, try to run in thread and display most recent run in terminal window.
-
-
-aoc_env_var = "AOC_HOME"
-session_cookie_filename = "session_cookie"
-template_filename = "solution.py"
-
-
-def get_problem_filename(year, day):
-  return str(year)[2:] + str(day).zfill(2)
 
 def download_input(year, day, session, aoc_home, max_trys=1):
   input_filename = get_problem_filename(year, day)
@@ -56,52 +38,13 @@ def respectfully_download_input(year, day, session, aoc_home, to_sleep=15):
   return i
 
 
-def fileExists(filename):
-  try:
-    with open(filename) as file:
-      file.read()
-    return True
-  except:
-    return False
-
-def readFileOrError(filename):
-  try:
-    with open(filename) as file:
-      return file.read().strip()
-  except:
-    print(f"ERROR: file not found {filename}.")
-    exit()
-
-
-class FileEventHandler(watchdog.events.FileSystemEventHandler):
-    def __init__(self, file, input):
-      self.file = file
-      self.input = input
-      self.last_bothered = datetime.datetime.now()
-      self.process = subprocess.Popen([self.file, self.input])
-
-    def on_any_event(self, event: watchdog.events.FileSystemEvent) -> None:
-          if event.event_type == "modified":
-            bothered = datetime.datetime.now()
-            if (bothered - self.last_bothered).total_seconds() > 1:
-              time.sleep(0.1)
-              self.last_bothered = bothered
-              self.process.kill()
-              print("\n\n\n")
-              self.process = subprocess.Popen([self.file, self.input])
-
 
 
 # Get session cookie from file.
 
-if aoc_env_var not in os.environ:
-  print(f"ERROR: Could not find {aoc_env_var} in environment variables.")
-  exit()
+aoc_home = get_env_var()
+session_cookie = get_session_cookie()
 
-aoc_home = os.environ[aoc_env_var]
-session_cookie_filepath = f"{aoc_home}/{session_cookie_filename}"
-
-session_cookie = readFileOrError(session_cookie_filepath)
 
 
 # Current time and when the problem will release.
@@ -114,13 +57,11 @@ if now.month != 12:
 elif now.day > 25:
   release = release.replace(day=1, year=now.year+1)
 
-#release = release.replace(day=2)
-#now = now.replace(day=2)
 
 # Check/ make setup for problem.
 solution_dir = f"{aoc_home}/solutions/{release.year}/{str(release.day).zfill(2)}/first_attempt"
-solution_file = f"{solution_dir}/{template_filename}"
-template_filepath = f"{aoc_home}/templates/{template_filename}"
+solution_file = f"{solution_dir}/{TEMPLATE_FILENAME}"
+template_filepath = f"{aoc_home}/templates/{TEMPLATE_FILENAME}"
 
 template_file = readFileOrError(template_filepath)
 
@@ -163,21 +104,6 @@ while now < release:
 
 download_input(release.year, release.day, session_cookie, aoc_home, max_trys=5)
 
-print(f"\n\nBeginning watch over {solution_file}.")
-
 input_filename = get_problem_filename(release.year, release.day)
 input_filepath = f"{aoc_home}/inputs/{input_filename}"
-raw_input = readFileOrError(input_filepath)
-
-# Begin watching solution file.
-
-event_handler = FileEventHandler(solution_file, raw_input)
-observer = watchdog.observers.Observer()
-observer.schedule(event_handler, solution_file)
-observer.start()
-try:
-    while True:
-        time.sleep(1)
-finally:
-    observer.stop()
-    observer.join()
+start_watch(solution_file, input_filepath)

@@ -44,7 +44,7 @@ def main():
     aoc_home = get_env_var()
     input_filename = get_problem_filename(year, day)
     input_filepath = f"{aoc_home}/inputs/{input_filename}"
-    solution_dir = f"{aoc_home}/solutions/{year}/{str(day).zfill(2)}/first_attempt"
+    solution_dir = f"{aoc_home}/solutions/{year}/{str(day).zfill(2)}/python"
     solution_file = f"{solution_dir}/solution.py"
     start_watch(solution_file, input_filepath)
 

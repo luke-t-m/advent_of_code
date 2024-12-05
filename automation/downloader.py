@@ -84,7 +84,7 @@ total_sleep = (total_inputs - local_inputs) * to_sleep
 
 if (release - now).total_seconds() > total_sleep:
   print(f"Downloading missing inputs. Will take {total_sleep} seconds.")
-  for year in range(2015, now.year):
+  for year in range(2024, now.year):
     for day in range(1, 26):
       respectfully_download_input(year, day, session_cookie, aoc_home, to_sleep)
 

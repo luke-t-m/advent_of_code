@@ -13,9 +13,8 @@ def subT(a, b):
     b1, b2 = b
     return (a1-b1, a2-b2)
 
-p1 = p2 = 0
-inp = sys.argv[1]
 
+inp = sys.argv[1]
 
 rows = inp.strip().split("\n")
 grid = defaultdict(lambda: None)
@@ -27,10 +26,6 @@ for r, i in enumerate(rows):
         grid[at] = j
         if j != ".":
             freqs[j].append(at)
-
-for freq in freqs:
-    if len(freqs[freq]) == 1:
-        freqs.remove(freq)
 
 antinodes1 = set()
 antinodes2 = set()
@@ -49,6 +44,5 @@ for freq in freqs:
 
 p1 = len(antinodes1)
 p2 = len(antinodes2)
-
 
 print(p1, p2)

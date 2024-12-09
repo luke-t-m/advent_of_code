@@ -4,8 +4,6 @@ import sys
 p1 = p2 = 0
 inp = sys.argv[1].strip()
 
-inp = "2333133121414131402"
-
 disk = []
 
 id = 0
@@ -47,6 +45,7 @@ for i in inp:
 
 disk2 = disk[::-1]
 
+
 for (id, size) in disk2:
     if id == -1:
         continue
@@ -54,20 +53,22 @@ for (id, size) in disk2:
         if id2 == id:
             break
         if id2 == -1 and size <= size2:
-            for j, (id3, size3) in enumerate(disk):
-                if id3 == id:
-                    disk[j] = (-1, size3)
             disk[i] = (id, size)
             diff = size2 - size
-
             if diff != 0:
                 disk.insert(i+1, (-1, diff))
             break
 
 disk2 = []
-for (id, size) in disk:
-    disk2 += size * [id]
 
+seen = set()
+for (id, size) in disk:
+    if id not in seen:
+        to_add = id
+        seen.add(id)
+    else:
+        to_add = -1
+    disk2 += size * [to_add]
 
 for i, v in enumerate(disk2):
     if v != -1:

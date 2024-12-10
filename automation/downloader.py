@@ -57,7 +57,7 @@ if now.month != 12:
 elif now.day > 25:
   release = release.replace(day=1, year=now.year+1)
 
-release = release.replace(day=now.day)
+release = release.replace(day=10)
 
 # Check/ make setup for problem.
 solution_dir = f"{aoc_home}/solutions/{release.year}/{str(release.day).zfill(2)}/first_attempt"

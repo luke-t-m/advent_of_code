@@ -1,10 +1,6 @@
 #!/usr/bin/python3
 
-import time
 import datetime
-import watchdog.events
-import watchdog.observers
-import subprocess
 import sys
 
 from autom import *

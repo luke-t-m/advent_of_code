@@ -20,22 +20,6 @@ directions = {'>': right,
               '<': left,
               '^': up}
 
-def do_print():
-    max_r = max_c = 0
-    for (r, c) in grid:
-        max_r = max(r, max_r)
-        max_c = max(c, max_c)
-    for r in range(max_r+1):
-        print()
-        for c in range(max_c+1):
-            at = (r, c)
-            if at == guy:
-                print("@", end = '')
-            else:
-                print(grid[at], end='')
-    print("\n\n")
-
-
 p1 = p2 = 0
 inp = sys.argv[1]
 
@@ -67,7 +51,6 @@ for at in grid:
         grid2[nat2] = stuff
 r, c = guy
 guy2 = (r, c * 2)
-
 
 
 for dir in instructions:
